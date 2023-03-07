@@ -34,7 +34,7 @@ void Vehicle::drive()
     // print id of the current thread
     std::cout << "Vehicle #" << _id << "::drive: thread id = " << std::this_thread::get_id() << std::endl;
 
-    // initalize variables
+    // initialize variables
     bool hasEnteredIntersection = false;
     double cycleDuration = 1; // duration of a single simulation cycle in ms
     std::chrono::time_point<std::chrono::system_clock> lastUpdate;
@@ -77,6 +77,8 @@ void Vehicle::drive()
                 // Task L2.1 : Start up a task using std::async which takes a reference to the method Intersection::addVehicleToQueue, 
                 // the object _currDestination and a shared pointer to this using the get_shared_this() function. 
                 // Then, wait for the data to be available before proceeding to slow down.
+                std::future <void> ftr = std::async(std::launch::deferred, &Intersection::addVehicleToQueue, _currDestination, get_shared_this());
+                ftr.get();
 
                 // slow down and set intersection flag
                 _speed /= 10.0;
