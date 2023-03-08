@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <thread>
+#include <mutex>
 
 enum ObjectType
 {
@@ -15,7 +16,7 @@ enum ObjectType
 class TrafficObject
 {
 public:
-    // constructor / desctructor
+    // constructor / destructor
     TrafficObject();
     ~TrafficObject();
 
